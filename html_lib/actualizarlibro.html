@@ -5,17 +5,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliteca - Proyecto Final</title>
+    <script>
+        function consultarLibro() {
+            const isbn = document.getElementById("isbn").value;
+            fetch(`/libros/${isbn}`)
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(error => { throw error; });
+                    }
+                    return response.json();
+                })
+                .then(libro => {
+                    document.getElementById("titulo").value = libro.titulo;
+                    document.getElementById("autor").value = libro.autor;
+                    document.getElementById("fecha").value = libro.fechaEdicion.substring(0, 10);
+                    document.getElementById("paginas").value = libro.paginas;
+                    document.getElementById("cant-ejem").value = libro.cantEjemplares;
+                    document.getElementById("cant-ejem-dis").value = libro.ejemDisponibles;
+                    document.getElementById("sinopsis").value = libro.sinopsis;
+                    document.getElementById("presentacion").value = libro.presentacion;
+                    document.getElementById("literatura").value = libro.literatura;
+                })
+                .catch(error => {
+                    alert(error.message || "Error al consultar el libro.");
+                });
+        }
+
+        function actualizarLibro() {
+            const isbn = document.getElementById("isbn").value;
+            const titulo = document.getElementById("titulo").value;
+            const autor = document.getElementById("autor").value;
+            const fecha = document.getElementById("fecha").value;
+            const paginas = document.getElementById("paginas").value;
+            const cantEjemplares = document.getElementById("cant-ejem").value;
+            const ejemDisponibles = document.getElementById("cant-ejem-dis").value;
+            const sinopsis = document.getElementById("sinopsis").value;
+            const presentacion = document.getElementById("presentacion").value;
+            const literatura = document.getElementById("literatura").value;
+
+            fetch(`/libros/${isbn}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    titulo,
+                    autor,
+                    fecha,
+                    paginas,
+                    cantEjemplares,
+                    ejemDisponibles,
+                    sinopsis,
+                    presentacion,
+                    literatura
+                }),
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Libro actualizado correctamente");
+                    } else {
+                        alert("Error al actualizar el libro");
+                    }
+                })
+        }
+    </script>
+
 </head>
 
 <body>
     <section>
         <h2>ACTUALIZAR LIBRO</h2>
         <p>Realice su consulta por el ISBN</p>
-        <form action="" method="post">
+        <form id="actualizarLibro" method="post">
             <div class="contenedor-caracteristicas">
                 <label for="isbn">ISBN</label>
                 <input type="text" name="isbn" id="isbn" required maxlength="50">
-                <button type="button">Consultar</button>
+                <button type="button" onclick="consultarLibro()">Consultar</button>
             </div>
 
             <div>
@@ -76,7 +141,7 @@
             </div>
 
             <div>
-                <button type="button">Actualizar el libro</button>
+                <button type="button" onclick="actualizarLibro()">Actualizar el libro</button>
                 <button type="reset">Limpiar Formulario</button>
                 <a href="/index.html"><button type="button">Ir al menú anterior</button></a>
             </div>

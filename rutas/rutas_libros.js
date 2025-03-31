@@ -47,4 +47,38 @@ router.get("/:isbn", async (req, res) => {
   }
 });
 
+//Ruta para actualizar un libro por ISBN (PUT)
+router.put("/:isbn", async (req, res) => {
+  try {
+    const libroActualizado = await Libro.findOneAndUpdate(
+      { isbn: req.params.isbn },
+      req.body,
+      { new: true }
+    );
+    if (!libroActualizado) {
+      return res.status(404).json({ message: "Libro no encontrado" });
+    }
+    res.json(libroActualizado);
+  } catch (error) {
+    console.error("error al actualizar el libro:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Ruta para eliminar un libro por ISBN (DELETE)
+router.delete("/:isbn", async (req, res) => {
+  try {
+    const libroEliminado = await Libro.findOneAndDelete({
+      isbn: req.params.isbn,
+    });
+    if (!libroEliminado) {
+      return res.status(404).json({ message: "Libro no encontrado" });
+    }
+    res.json({ message: "Libro eliminado correctamente" });
+  } catch (error) {
+    console.error("Error al eliminar el libro:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;
