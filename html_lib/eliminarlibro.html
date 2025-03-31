@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliteca - Proyecto Final</title>
+</head>
+
+<body>
+    <section>
+        <h2>ELIMINAR LIBRO</h2>
+        <p>Realice su consulta por el ISBN</p>
+        <form action="" method="post">
+            <div class="contenedor-caracteristicas">
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" id="isbn" required maxlength="50">
+                <button type="button">Consultar</button>
+            </div>
+
+            <div>
+                <label for="titulo">Titulo del libro</label>
+                <input type="text" name="titulo" id="titulo" required maxlength="50" disabled>
+            </div>
+
+            <div>
+                <label for="autor">Autor del libro</label>
+                <input type="text" name="autor" id="autor" required maxlength="60" disabled>
+            </div>
+
+            <div>
+                <label for="fecha">Fecha de edición del libro</label>
+                <input type="date" name="fecha" id="fecha" required disabled>
+            </div>
+
+            <div>
+                <label for="paginas">Numero de páginas</label>
+                <input type="number" name="paginas" id="paginas" maxlength="3" required disabled>
+            </div>
+
+            <div>
+                <label for="">Cantidad de ejemplares</label>
+                <input type="number" name="q-ejemplares" id="cant-ejem" maxlength="3" required disabled>
+            </div>
+
+            <div>
+                <label for="">Cantidad de ejemplares disponibles</label>
+                <input type="number" name="q-ejemplares-dis" id="cant-ejem-dis" maxlength="3" required disabled>
+            </div>
+
+            <div>
+                <label for="">Sinopsis</label>
+                <textarea name="sinopsis" id="sinopsis" cols="30" rows="5" maxlength="1000" disabled></textarea>
+            </div>
+
+            <div>
+                <label for="presentacion">Tipo de presentación del libro</label>
+                <select name="presentacion" id="presentacion" required disabled>
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="fisico">Físico</option>
+                    <option value="electronico">Electrónico</option>
+                    <option value="video">Video</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="literatura">Tipo de Literatura</label>
+                <select name="literatura" id="literatura" required disabled>
+                    <option selected disabled>Seleccione una opción</option>
+                    <option value="narrativo">Narrativo</option>
+                    <option value="lirico">Lírico</option>
+                    <option value="poetico">Poético</option>
+                    <option value="dramatico">Dramático</option>
+                    <option value="didactico">Didáctico</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="button">Eliminar el libro</button>
+                <button type="reset">Limpiar Formulario</button>
+                <a href="/index.html"><button type="button">Ir al menú anterior</button></a>
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>
