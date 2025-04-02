@@ -5,13 +5,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bibliteca - Proyecto Final</title>
+    <script>
+        function mostrarLibros() {
+            fetch('/libros')
+                .then(response => response.json())
+                .then(libros => {
+                    const tablaLibros = document.getElementById('tablaLibros');
+                    let tablaHTML = '<tr><th>ISBN</th><th>Título</th><th>Autor</th><th>Fecha Edición</th><th>Páginas</th><th>Ejemplares</th><th>Disponibles</th><th>Sinopsis</th><th>Presentación</th><th>Literatura</th></tr>';
+                    libros.forEach(libro => {
+                        const fechaEdicion = libro.fechaEdicion ? libro.fechaEdicion.substring(0, 10) : ''; // Manejo de fechaEdicion undefined
+                        tablaHTML += `<tr>
+                    <td>${libro.isbn}</td>
+                    <td>${libro.titulo}</td>
+                    <td>${libro.autor}</td>
+                    <td>${fechaEdicion}</td>
+                    <td>${libro.paginas}</td>
+                    <td>${libro.cantEjemplares}</td>
+                    <td>${libro.ejemDisponibles}</td>
+                    <td>${libro.sinopsis || ''}</td>
+                    <td>${libro.presentacion}</td>
+                    <td>${libro.literatura}</td>
+                </tr>`;
+                    });
+                    tablaLibros.innerHTML = tablaHTML;
+                    tablaLibros.style.display = 'table';
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Error al obtener los libros");
+                });
+        }
+
+        function ocultarLibros() {
+            const tablaLibros = document.getElementById('tablaLibros');
+            tablaLibros.style.display = 'none';
+        }
+    </script>
 </head>
 
 <body>
     <h1>BIBLIOTECA - PROYECTO FINAL</h1>
 
     <h2><a href="#menu_libros">Libros</a></h2>
-    <h2><a href="#">Autores</a></h2>
+    <h2><a href="#menu_autores">Autores</a></h2>
+
+    <hr>
+
+    <h2>CONSULTAR TODOS LOS LIBROS REGISTRADOS EN LA BIBLIOTECA</h2>
+    <button onclick="mostrarLibros()">Mostrar Libros</button>
+    <button onclick="ocultarLibros()">Ocultar Libros</button>
+    <table id="tablaLibros" style="display: none;"></table>
 
     <hr>
 

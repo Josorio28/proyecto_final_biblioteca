@@ -81,4 +81,15 @@ router.delete("/:isbn", async (req, res) => {
   }
 });
 
+// Ruta para obtener todos los libros (GET)
+router.get("/", async (req, res) => {
+  try {
+    const libros = await Libro.find();
+    res.json(libros);
+  } catch (error) {
+    console.error("Error al obtener los libros:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

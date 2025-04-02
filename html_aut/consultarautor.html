@@ -20,9 +20,9 @@
                     document.getElementById("nombre_autor").value = autor.nombreAutor;
                     document.getElementById("apellido").value = autor.apellido;
                     document.getElementById("fecha_publicacion").value = autor.fechaPublicacion.substring(0, 10);
-                    document.getElementById("premios").value = autor.premios;
+                    document.getElementById("premios").value = autor.premios || ""; // Manejar premios opcionales
                     document.getElementById("fecha_nacimiento").value = autor.fechaNacimiento.substring(0, 10);
-                    document.getElementById("fecha_fallecimiento").value = autor.fechaFallecimiento.substring(0, 10);
+                    document.getElementById("fecha_fallecimiento").value = autor.fechaFallecimiento ? autor.fechaFallecimiento.substring(0, 10) : ""; // Manejar fechaFallecimiento opcional
                 })
                 .catch(error => {
                     const errorDiv = document.getElementById("error-message");
