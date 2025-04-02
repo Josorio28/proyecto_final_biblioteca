@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliteca - Proyecto Final</title>
+</head>
+
+<body>
+    <section>
+        <h2>CREAR AUTOR</h2>
+        <form action="/autores/" method="post">
+
+            <div class="contenedor-caracteristicas">
+                <label for="nombre_autor">Nombres del Autor</label>
+                <input type="text" name="nombre_autor" id="nombre_autor" required maxlength="60">
+            </div>
+
+            <div>
+                <label for="apellido">Apellidos del autor</label>
+                <input type="text" name="apellido" id="apellido" required maxlength="60">
+            </div>
+
+            <div>
+                <label for="fecha_publicacion">Fecha de publicación del primer libro</label>
+                <input type="date" name="fecha_publicacion" id="fecha_publicacion" required>
+            </div>
+
+            <div>
+                <label for="premios">Premios</label>
+                <input type="text" name="premios" id="premios" required maxlength="100">
+            </div>
+
+            <div>
+                <label for="fecha_nacimiento">Fecha de nacimiento del autor</label>
+                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required>
+            </div>
+
+            <div>
+                <label for="fecha_fallecimiento">Fecha de fecha_fallecimiento del autor</label>
+                <input type="date" name="fecha_fallecimiento" id="fecha_fallecimiento">
+            </div>
+
+            <div>
+                <button type="submit">Crear el autor</button>
+                <button type="reset">Limpiar Formulario</button>
+                <a href="/index.html"><button type="button">Ir al menú anterior</button></a>
+            </div>
+        </form>
+    </section>
+
+</body>
+
+</html>
