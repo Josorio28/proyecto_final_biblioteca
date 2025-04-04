@@ -1,25 +1,38 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const uri = process.env.MONGO_URI;
 const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 const port = 3001;
 
-// Configuración de la conexión a MongoDB
+//---------------------------------------------
+// CONEXION A LA BASE DE DATOS
+//---------------------------------------------
+var bdURL = "mongodb://127.0.0.1:27017/biblioteca";
+mongoose.connect(bdURL);
 
-require("dotenv").config(); //para procesar el documento .env que contiene la URI de acceso a la base de datos
+//CONFIGURACION EVENTOS DE LA CONEXION
+mongoose.connection.on("connected", function () {
+  console.log("Conexion a mongo realizada en: " + bdURL);
+});
+mongoose.connection.on("error", function (err) {
+  console.log("ERROR: no hay conexion a mongo: " + err);
+});
+mongoose.connection.on("disconnected", function (err) {
+  console.log("Desconexion a mongo db realizada con exito." + err);
+});
 
-mongoose
-  .connect(uri, {
-    dbName: "biblioteca",
-  })
-  .then(() => {
-    console.log("Conexión exitosa a MongoDB");
-  })
-  .catch((error) => {
-    console.error("Error al conectarse a MongoDB:", error);
+// Cuando termine Node se desconecta de mongo
+process.on("SIGINT", function () {
+  mongoose.connection.close(function () {
+    console.log(
+      "Conexion con base de datos terminada por finalizacion del servidor."
+    );
+    process.exit(0);
   });
+});
+
+//---------------------------------------------
 
 // Configuración de body-parser para procesar datos del formulario
 app.use(bodyParser.urlencoded({ extended: true }));
